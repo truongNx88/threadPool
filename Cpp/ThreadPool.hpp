@@ -24,7 +24,7 @@ class ThreadPool {
 private:
     void threadLoop();
 
-    bool shouldTerminate = false; // Tells threads to stop looking for jobs
+    bool shouldTerminate; // Tells threads to stop looking for jobs
     std::mutex queueMutex; // Prevents data races to the job queue
     std::condition_variable mutexCondition; // Allows threads to wait on new jobs or termination 
     std::vector<std::thread> threads;

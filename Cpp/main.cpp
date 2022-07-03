@@ -16,16 +16,19 @@ void printTask(std::string threadName) {
 
 int main(int argc, char const *argv[]) {
     ThreadPool* pool = new ThreadPool();
-    // pool->setMaxThread(3);
-    
-    for (size_t i = 1; i < 6; i++) {
+    // pool->setMaxThread(2);
+    // pool->start();
+    // pool->stop();                                                                                                                                                                                                                                                                                                                                                                                  
+    for (size_t i = 1; i < 10; i++) {
         std::string threadName = "Thread " + std::to_string(i);
-        pool->queueJob( [&] {
+        pool->queueJob([=]()->void{
+            std::cout << "Name: " << threadName << std::endl;
             printTask(threadName);
-        });
+        });   
+        
     }
-    pool->start();
     
+    pool->start();
     pool->stop();
     return 0;
 }
